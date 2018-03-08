@@ -3,6 +3,7 @@ package com.dgit.service;
 import java.util.List;
 
 import com.dgit.domain.BoardVO;
+import com.dgit.domain.Criteria;
 
 
 public interface BoardService {
@@ -11,4 +12,7 @@ public interface BoardService {
 	public void modify(BoardVO board) throws Exception;
 	public void remove(int bno) throws Exception;
 	public List<BoardVO> listAll() throws Exception;
+	public List<BoardVO> listCriteria(Criteria cri) throws Exception;
+	public int listCountCriteria() throws Exception;
+	public void updateCnt(int bno) throws Exception;
 }

@@ -17,12 +17,28 @@
 		select * from tbl_board
 	</select>
 	
+	<select id="listPage" resultType="BoardVO">
+		select * from tbl_board order by bno desc, regdate desc limit #{page}, 10
+	</select>
+	
+	<select id="listCreiteria" resultType="BoardVO">
+		select * from tbl_board order by bno desc, regdate desc limit #{pageStart},#{perPageNum} 
+	</select>
+	
 	<update id="update">
 		update tbl_board set title=#{title}, content=#{content}, writer=#{writer} where bno=#{bno}
+	</update>
+	
+	<update id="updateCnt">
+		update tbl_board set viewcnt=viewcnt+1 where bno=#{bno}
 	</update>
 	
 	<delete id="delete">
 		delete from tbl_board where bno=#{bno}
 	</delete>
+	
+	<select id="countPaging" resultType="int">
+		select count(bno) from tbl_board
+	</select>
 
 </mapper>
