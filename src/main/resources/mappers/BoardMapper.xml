@@ -21,8 +21,37 @@
 		select * from tbl_board order by bno desc, regdate desc limit #{page}, 10
 	</select>
 	
-	<select id="listCreiteria" resultType="BoardVO">
+	<select id="listCriteria" resultType="BoardVO">
 		select * from tbl_board order by bno desc, regdate desc limit #{pageStart},#{perPageNum} 
+	</select>
+	
+	<sql id="search">
+		<if test="searchType=='t'.toString()">
+			where title like concat('%',#{keyword},'%')
+		</if>
+		<if test="searchType=='c'.toString()">
+			where content like concat('%',#{keyword},'%')
+		</if>
+		<if test="searchType=='w'.toString()">
+			where writer like concat('%',#{keyword},'%')
+		</if>
+		<if test="searchType=='tc'.toString()">
+			where title like concat('%',#{keyword},'%')
+				or writer like concat('%',#{keyword},'%')
+		</if>
+		<if test="searchType=='cw'.toString()">
+			where content like concat('%',#{keyword},'%')
+				or writer like concat('%',#{keyword},'%')
+		</if>
+		<if test="searchType=='tcw'.toString()">
+			where title like concat('%',#{keyword},'%')
+				or content like concat('%',#{keyword},'%')
+				or writer like concat('%',#{keyword},'%')
+		</if>
+	</sql>
+	
+	<select id="listSearch" resultType="BoardVO">
+		select * from tbl_board <include refid="search"></include> order by bno desc, regdate desc limit #{pageStart},#{perPageNum}  
 	</select>
 	
 	<update id="update">
@@ -39,6 +68,10 @@
 	
 	<select id="countPaging" resultType="int">
 		select count(bno) from tbl_board
+	</select>
+	
+	<select id="listSearchCount" resultType="int">
+		select count(bno) from tbl_board <include refid="search"></include>
 	</select>
 
 </mapper>

@@ -8,6 +8,7 @@ import org.springframework.stereotype.Repository;
 
 import com.dgit.domain.BoardVO;
 import com.dgit.domain.Criteria;
+import com.dgit.domain.SearchCriteria;
 
 @Repository
 public class BoardDaoImpl implements BoardDao {
@@ -55,9 +56,9 @@ public class BoardDaoImpl implements BoardDao {
 	}
 
 	@Override
-	public List<BoardVO> listCreiteria(Criteria cri) throws Exception {
+	public List<BoardVO> listCriteria(Criteria cri) throws Exception {
 		
-		return session.selectList(namespace+".listCreiteria",cri);
+		return session.selectList(namespace+".listCriteria",cri);
 	}
 
 	@Override
@@ -68,6 +69,18 @@ public class BoardDaoImpl implements BoardDao {
 	@Override
 	public void updateCnt(int bno) throws Exception {
 		session.selectOne(namespace+".updateCnt",bno);
+	}
+
+	@Override
+	public List<BoardVO> listSearch(SearchCriteria cri) throws Exception {
+
+		return session.selectList(namespace+".listSearch",cri);
+	}
+
+	@Override
+	public int listSearchCount(SearchCriteria cri) throws Exception {
+
+		return session.selectOne(namespace+".listSearchCount",cri);
 	}
 
 }

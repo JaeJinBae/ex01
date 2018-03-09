@@ -109,6 +109,16 @@ public class PageMaker {
 		//?page=4&perPageNum=10
 		return uriComponents.toUriString();
 	}
+	
+	public String makeSearch(int page){
+		UriComponents uriComponents=UriComponentsBuilder.newInstance().queryParam("page", page)
+																		.queryParam("perPageNum", cri.getPerPageNum())
+																		.queryParam("searchType", ((SearchCriteria)cri).getSearchType())
+																		.queryParam("keyword", ((SearchCriteria)cri).getKeyword()).build();
+		
+		//?page=4&perPageNum=10
+		return uriComponents.toUriString();
+	}
 
 }
 
