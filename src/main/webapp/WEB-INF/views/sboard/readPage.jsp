@@ -10,11 +10,11 @@
 						<h3 class="box-title">전부다 나와라~~</h3>
 					</div>
 					<div class="box-body">
-						<form method="get" action="">
+						<%-- <form method="get" action="">
 							<input type="hidden" name="bno" value="${board.bno}">
 							<input type="hidden" name="page" value="${cri.page}">
 							<input type="hidden" name="perPageNum" value="${cri.perPageNum}">
-						</form>
+						</form> --%>
 						<div class="form-group">
 							<label>Title</label>
 							<input type="text" name="title" class="form-control" placeholder="title" value="${board.title}" readonly="readonly">
@@ -28,9 +28,9 @@
 							<input type="text" name="writer" class="form-control" placeholder="writer" value="${board.writer}" readonly="readonly">
 						</div>
 						<div class="form-group">
-							<a href="modify?bno=${board.bno}&page=${cri.page}&perPageNum=${cri.perPageNum}"><input type="button" value="modify" class="btn btn-warning"></a>
+							<a href="modify${pageMaker.makeSearch(pageMaker.cri.page)}&bno=${board.bno}"><input type="button" value="modify" class="btn btn-warning"></a>
 							<a href="remove?bno=${board.bno}&page=${cri.page}&perPageNum=${cri.perPageNum}"><input type="button" value="remove" class="btn btn-danger"></a>
-							<a href="listPage?page=${cri.page}&perPageNum=${cri.perPageNum}"><input type="button" value="Go list" class="btn btn-primary"></a>
+							<a href="listPage${pageMaker.makeSearch(pageMaker.cri.page)}"><input type="button" value="Go list" class="btn btn-primary"></a>
 						</div>
 					</div>
 				</div>

@@ -10,7 +10,7 @@
 						<h3 class="box-title">전부다 나와라~~</h3>
 					</div>
 					<div class="box-body">
-						<form method="post" action="modify?bno=${board.bno}&page=${cri.page}">
+						<form method="post" action="modify${pageMaker.makeSearch(pageMaker.cri.page)}&bno=${board.bno}">
 							<div class="form-group">
 								<label>Title</label>
 								<input type="text" name="title" class="form-control" placeholder="title" value="${board.title}">

@@ -61,28 +61,41 @@ public class SearchBoardController {
 		if(i==null){
 			service.updateCnt(bno);
 		}
+		PageMaker pageMaker=new PageMaker();
+		pageMaker.setCri(cri);
+		pageMaker.makeSearch(cri.getPage());
+		pageMaker.setTotalCount(service.listSearchCount(cri));
+		
 		BoardVO vo = service.read(bno);
 		model.addAttribute("board", vo);
-		model.addAttribute("cri",cri);
+		model.addAttribute("pageMaker",pageMaker);
+		//model.addAttribute("cri",cri);
 	}
 	
 	@RequestMapping(value = "/modify", method = RequestMethod.GET)
 	public void modifyGet(int bno, @ModelAttribute("cri") SearchCriteria cri, Model model) throws Exception {
 		logger.info("modify get");
 		BoardVO vo = service.read(bno);
+		
+		PageMaker pageMaker=new PageMaker();
+		pageMaker.setCri(cri);
+		pageMaker.makeSearch(cri.getPage());
+		pageMaker.setTotalCount(service.listSearchCount(cri));
+		
 		model.addAttribute("board", vo);
+		model.addAttribute("pageMaker",pageMaker);
 	}
 
 	@RequestMapping(value = "/modify", method = RequestMethod.POST)
-	public String modifyPost(BoardVO board, SearchCriteria cri, RedirectAttributes rtts) throws Exception {
+	public String modifyPost(BoardVO board, @ModelAttribute("cri") SearchCriteria cri, RedirectAttributes rtts) throws Exception {
 		logger.info("modify post");
 		service.modify(board);
-		
-		rtts.addAttribute("perPageNum",cri.getPerPageNum());
-		rtts.addAttribute("page",cri.getPage());
-		rtts.addAttribute("bno", board.getBno());
 
-		return "redirect:/sboard/readPage?i=1";
+		rtts.addAttribute("bno", board.getBno());
+		PageMaker pageMaker=new PageMaker();
+		pageMaker.setCri(cri);
+
+		return "redirect:/sboard/readPage"+pageMaker.makeSearch(cri.getPage())+"&i=1";
 	}
 	
 	@RequestMapping(value = "/remove", method = RequestMethod.GET) 
