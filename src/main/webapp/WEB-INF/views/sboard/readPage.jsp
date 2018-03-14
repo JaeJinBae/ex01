@@ -183,7 +183,7 @@
 				$(document).on("click",".btn btn-primary btn-xs",function(){
 					modifyRno=$(this).partents("h3").find(".modalRno").text();
 					var reText=$(this).partents().find(".modalText").text();
-					
+					alert(modifyRno);
 					$("#modalContent").val(reText);
 				});
 				
