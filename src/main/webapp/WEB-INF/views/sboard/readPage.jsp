@@ -180,6 +180,13 @@
 					getPage(1);
 				});
 				
+				$(document).on("click","#pagination li a", function(){
+					e.pre
+					alert($(this).text());
+					
+				});
+				
+				
 				$(document).on("click",".replyLi .timeline-item .timeline-footer a",function(){
 					modifyRno=$(this).parents(".timeline-item").find(".modalRno").text();
 					var reText=$(this).parents(".timeline-item").find(".modalText").text();
