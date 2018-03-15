@@ -23,7 +23,7 @@ public class BoardServiceImpl implements BoardService{
 	}
 
 	@Override
-	public BoardVO read(int bno) throws Exception {
+	public BoardVO read(int bno) throws Exception {		
 		return dao.read(bno);
 	}
 

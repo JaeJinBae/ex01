@@ -1,10 +1,12 @@
 package com.dgit.persistence;
 
+import java.util.HashMap;
 import java.util.List;
 
 import org.apache.ibatis.session.SqlSession;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Repository;
+import org.springframework.transaction.annotation.Transactional;
 
 import com.dgit.domain.BoardVO;
 import com.dgit.domain.Criteria;
@@ -24,7 +26,9 @@ public class BoardDaoImpl implements BoardDao {
 	}
 
 	@Override
+	@Transactional
 	public BoardVO read(Integer bno) throws Exception {
+		
 		return session.selectOne(namespace+".read",bno);
 	}
 
@@ -81,6 +85,15 @@ public class BoardDaoImpl implements BoardDao {
 	public int listSearchCount(SearchCriteria cri) throws Exception {
 
 		return session.selectOne(namespace+".listSearchCount",cri);
+	}
+
+	@Override
+	public void updateReplyCnt(int bno, int amount) throws Exception {
+		HashMap<String, Object> map=new HashMap<>();
+		map.put("bno", bno);
+		map.put("amount", amount);
+		
+		session.update(namespace+".updateReplyCnt",map);
 	}
 
 }

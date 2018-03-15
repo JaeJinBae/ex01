@@ -56,7 +56,7 @@
 				</div>
 				<ul class="timeline">
 					<li class="time-label" id="repliesDiv">
-						<span class="bg-green">Replies List</span>
+						<span class="bg-green">Replies List[${board.replycnt}]</span>
 					</li>
 				</ul>
 				<div class="text-center">
@@ -71,7 +71,7 @@
 					          <h4 class="modal-title">Modal Header</h4>
 					        </div>
 					        <div class="modal-body">
-					          <input type="text" value="" id="modalContent">
+					          <input type="text" id="modalContent">
 					        </div>
 					        <div class="modal-footer">
 					          <button type="button" class="btn btn-default" data-dismiss="modal" id="modifyReply">Modify</button>
@@ -96,7 +96,7 @@
 							<i class="fa fa-clock-o"></i>{{prettifyDate regdate}}
 						</span>
 						<h3 class="timeline-header"><strong class='modalRno'>{{rno}}</strong>-{{replyer}}</h3>
-						<div class="timeline-body" class='modalText'>{{replytext}}</div>
+						<div class="timeline-body"><span class='modalText'>{{replytext}}</span></div>
 						<div class="timeline-footer">
 							<a class="btn btn-primary btn-xs" data-toggle="modal" data-target="#myModal">Modify</a>
 						</div>
@@ -180,17 +180,16 @@
 					getPage(1);
 				});
 				
-				$(document).on("click",".btn btn-primary btn-xs",function(){
-					modifyRno=$(this).partents("h3").find(".modalRno").text();
-					var reText=$(this).partents().find(".modalText").text();
-					alert(modifyRno);
-					$("#modalContent").val(reText);
+				$(document).on("click",".replyLi .timeline-item .timeline-footer a",function(){
+					modifyRno=$(this).parents(".timeline-item").find(".modalRno").text();
+					var reText=$(this).parents(".timeline-item").find(".modalText").text();
+					
+					$("#modalContent").val(reText); 
 				});
 				
 				$(document).on("click","#modifyReply",function(){
-					var modifytext=$("#modalText").text();
+					var modifytext=$("#modalContent").val();
 					var sendData={replytext:modifytext};
-					alert(modifyRno);
 					
 					$.ajax({
 						url:"${pageContext.request.contextPath}/replies/"+modifyRno,
@@ -201,8 +200,23 @@
 						success:function(result){
 							console.log(result);
 							alert("수정 성공");
+							getPage(1);
 						}
 					})
+				});
+				
+				$(document).on("click","#deleteReply",function(){
+					
+					$.ajax({
+						url:"${pageContext.request.contextPath}/replies/"+modifyRno,
+						type:"delete",
+						success:function(result){
+							console.log(result);
+							alert("삭제완료");
+							getPage(1);
+						}
+						
+					});
 				});
 				
 			});

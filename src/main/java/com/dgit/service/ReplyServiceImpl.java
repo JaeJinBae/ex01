@@ -4,9 +4,11 @@ import java.util.List;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
+import org.springframework.transaction.annotation.Transactional;
 
 import com.dgit.domain.Criteria;
 import com.dgit.domain.ReplyVO;
+import com.dgit.persistence.BoardDao;
 import com.dgit.persistence.ReplyDao;
 
 @Service
@@ -15,15 +17,19 @@ public class ReplyServiceImpl implements ReplyService {
 	@Autowired
 	private ReplyDao dao;
 	
+	@Autowired
+	private BoardDao boardDao;
+	
 	@Override
 	public List<ReplyVO> listReply(int bno) throws Exception {
 		return dao.list(bno);
 	}
 
 	@Override
+	@Transactional
 	public void addReply(ReplyVO vo) throws Exception {
 		dao.create(vo);
-
+		boardDao.updateReplyCnt(vo.getBno(), 1);
 	}
 
 	@Override
@@ -32,8 +38,11 @@ public class ReplyServiceImpl implements ReplyService {
 	}
 
 	@Override
+	@Transactional
 	public void removeReply(int rno) throws Exception {
+		int bno=dao.getBno(rno);
 		dao.delete(rno);
+		boardDao.updateReplyCnt(bno, -1);
 
 	}
 
