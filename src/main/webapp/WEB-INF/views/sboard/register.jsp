@@ -3,7 +3,6 @@
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
 <%@ include file="../include/header.jsp" %>
 
-
 	<section class="content">
 		<div class="row">
 			<div class="col-md-12">
@@ -12,7 +11,7 @@
 						<h3 class="box-title">전부다 나와라~~</h3>
 					</div>
 					<div class="box-body">
-						<form method="post" action="register">
+						<form method="post" action="register" enctype="multipart/form-data">
 							<div class="form-group">
 								<label>Title</label>
 								<input type="text" name="title" class="form-control" placeholder="title">
@@ -24,6 +23,10 @@
 							<div class="form-group">
 								<label>Writer</label>
 								<input type="text" name="writer" class="form-control" placeholder="writer">
+							</div>
+							<div class="form-group">
+								<label>Image File</label>
+								<input type="file" name="imageFiles" multiple="multiple" class="form-control">
 							</div>
 							<div class="form-group">
 								<input type="submit" value="submit" class="btn btn-primary">

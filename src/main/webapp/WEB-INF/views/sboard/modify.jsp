@@ -1,5 +1,6 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
     pageEncoding="UTF-8"%>
+<%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
 <%@ include file="../include/header.jsp" %>
 
 	<section class="content">
@@ -23,6 +24,15 @@
 								<label>Writer</label>
 								<input type="text" name="writer" class="form-control" placeholder="writer" value="${board.writer}">
 							</div>
+							<div class="form-group" id="image_wrap">
+							<c:forEach var="file" items="${board.files}">
+								<div class="imgWrapper">
+									<img src="displayFile?filename=${file}">
+									<input type="button" value="X" class="delImg">
+								</div>
+								
+							</c:forEach>
+						</div>
 							<div class="form-group">
 								<input type="submit" value="OK" class="btn btn-warning">
 							</div>

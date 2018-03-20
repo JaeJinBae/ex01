@@ -56,4 +56,9 @@ public class ReplyServiceImpl implements ReplyService {
 		return dao.count(bno);
 	}
 
+	@Override
+	public void deleteByBno(int bno) throws Exception {
+		dao.deleteByBno(bno);
+	}
+
 }

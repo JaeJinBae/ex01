@@ -14,4 +14,6 @@ public interface ReplyDao {
 	public int count(int bno) throws Exception;
 	
 	public int getBno(int rno) throws Exception;
+	
+	public void deleteByBno(int bno) throws Exception;
 }

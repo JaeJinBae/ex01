@@ -12,4 +12,5 @@ public interface ReplyService {
 	public void removeReply(int rno) throws Exception;
 	public List<ReplyVO> listReplyPage(int bno, Criteria cri) throws Exception;
 	public int count(int bno) throws Exception;
+	public void deleteByBno(int bno) throws Exception;
 }

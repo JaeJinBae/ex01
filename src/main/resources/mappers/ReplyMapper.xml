@@ -23,6 +23,10 @@
 		delete from tbl_reply where rno=#{rno}
 	</delete>
 	
+	<delete id="deleteByBno">
+		delete from tbl_reply where bno=#{bno}
+	</delete>
+	
 	<select id="count" resultType="int">
 		select count(bno) from tbl_reply where bno=#{bno}
 	</select>

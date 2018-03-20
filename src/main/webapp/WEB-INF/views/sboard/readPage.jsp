@@ -1,5 +1,6 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
     pageEncoding="UTF-8"%>
+<%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
 <%@ include file="../include/header.jsp" %>
 
 	<section class="content">
@@ -26,6 +27,11 @@
 						<div class="form-group">
 							<label>Writer</label>
 							<input type="text" name="writer" class="form-control" placeholder="writer" value="${board.writer}" readonly="readonly">
+						</div>
+						<div class="form-group" id="image_wrap">
+							<c:forEach var="file" items="${board.files}">
+								<img src="displayFile?filename=${file}">
+							</c:forEach>
 						</div>
 						<div class="form-group">
 							<a href="modify${pageMaker.makeSearch(pageMaker.cri.page)}&bno=${board.bno}"><input type="button" value="modify" class="btn btn-warning"></a>

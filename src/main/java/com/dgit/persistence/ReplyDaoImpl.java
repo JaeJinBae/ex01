@@ -58,4 +58,9 @@ public class ReplyDaoImpl implements ReplyDao {
 		return session.selectOne(namespace+".getBno",rno);
 	}
 
+	@Override
+	public void deleteByBno(int bno) throws Exception {
+		session.delete(namespace+".deleteByBno", bno);
+	}
+
 }

@@ -4,7 +4,7 @@
   "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
 <mapper namespace="com.dgit.mappers.BoardMapper">
 
-	<insert id="create">
+	<insert id="create" useGeneratedKeys="true" keyProperty="bno">
 		insert into tbl_board(title,content, writer)
 		values(#{title},#{content},#{writer});
 	</insert>
@@ -77,5 +77,17 @@
 	<select id="listSearchCount" resultType="int">
 		select count(bno) from tbl_board <include refid="search"></include>
 	</select>
+	
+	<insert id="addAttach">
+		insert into tbl_attach(fullName, bno) values(#{fullName}, #{bno})
+	</insert>
+	
+	<select id="getAttach" resultType="string">
+		select fullName from tbl_attach where bno=#{bno} order by regdate
+	</select>
+	
+	<delete id="deleteAttach">
+		delete from tbl_attach where bno=#{bno}
+	</delete>
 
 </mapper>

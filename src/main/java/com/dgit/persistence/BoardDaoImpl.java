@@ -96,4 +96,24 @@ public class BoardDaoImpl implements BoardDao {
 		session.update(namespace+".updateReplyCnt",map);
 	}
 
+	@Override
+	public void addAttach(String fullName, int bno) throws Exception {
+		HashMap<String, Object> map=new HashMap<>();
+		map.put("fullName", fullName);
+		map.put("bno", bno);
+		
+		session.insert(namespace+".addAttach",map);
+	}
+
+	@Override
+	public List<String> getAttach(int bno) throws Exception {
+		return session.selectList(namespace+".getAttach",bno);
+	}
+
+	@Override
+	public void deleteAttach(int bno) throws Exception {
+		session.delete(namespace+".deleteAttach",bno);
+	}
+	
+
 }

@@ -76,7 +76,7 @@ public class BoardController {
 	@RequestMapping(value = "/read", method = RequestMethod.GET)
 	public void read(int bno, Model model) throws Exception {
 		logger.info("read");
-		BoardVO vo = service.read(bno);
+		BoardVO vo = service.read(bno,true);
 		model.addAttribute("board", vo);
 	}
 	
@@ -86,14 +86,14 @@ public class BoardController {
 		if(i==null){
 			service.updateCnt(bno);
 		}
-		BoardVO vo = service.read(bno);
+		BoardVO vo = service.read(bno,true);
 		model.addAttribute("board", vo);
 	}
 
 	@RequestMapping(value = "/modify", method = RequestMethod.GET)
 	public void modifyGet(int bno, @ModelAttribute("cri") Criteria cri, Model model) throws Exception {
 		logger.info("modify get");
-		BoardVO vo = service.read(bno);
+		BoardVO vo = service.read(bno,true);
 		model.addAttribute("board", vo);
 	}
 
