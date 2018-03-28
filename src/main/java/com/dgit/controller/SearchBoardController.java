@@ -81,7 +81,6 @@ public class SearchBoardController {
 			board.setFiles(files);
 		}
 		
-		
 		service.regist(board);
 		rttr.addFlashAttribute("msg","success");
 		return "redirect:/sboard/listPage";
@@ -89,7 +88,7 @@ public class SearchBoardController {
 	
 	@RequestMapping(value = "/readPage", method = RequestMethod.GET)
 	public void readPage(int bno, String i, @ModelAttribute("cri") SearchCriteria cri, Model model) throws Exception {
-		logger.info("readPage");
+		logger.info("readPage============");
 		if(i==null){
 			service.updateCnt(bno);
 		}
@@ -101,7 +100,6 @@ public class SearchBoardController {
 		BoardVO vo = service.read(bno,true);
 		model.addAttribute("board", vo);
 		model.addAttribute("pageMaker",pageMaker);
-		//model.addAttribute("cri",cri);
 	}
 	
 	@RequestMapping(value = "/modify", method = RequestMethod.GET)
