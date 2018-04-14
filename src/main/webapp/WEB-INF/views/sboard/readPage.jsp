@@ -34,8 +34,10 @@
 							</c:forEach>
 						</div>
 						<div class="form-group">
+						<c:if test="${board.writer == login.userid}">
 							<a href="modify${pageMaker.makeSearch(pageMaker.cri.page)}&bno=${board.bno}"><input type="button" value="modify" class="btn btn-warning"></a>
 							<a href="remove?bno=${board.bno}&page=${cri.page}&perPageNum=${cri.perPageNum}"><input type="button" value="remove" class="btn btn-danger"></a>
+						</c:if>
 							<a href="listPage${pageMaker.makeSearch(pageMaker.cri.page)}"><input type="button" value="Go list" class="btn btn-primary"></a>
 						</div>
 					</div>
@@ -52,7 +54,7 @@
 					</div>
 					<div class="box-body">
 						<label for="exampleInputEmail1">Writer</label>
-						<input type="text" id="writer" class="form-control">
+						<input type="text" id="writer" class="form-control" value="${login.userid}" readonly="readonly">
 						<label for="replytext">Reply Text</label>
 						<input type="text" id="replytext" class="form-control">
 					</div>
@@ -103,14 +105,25 @@
 						</span>
 						<h3 class="timeline-header"><strong class='modalRno'>{{rno}}</strong>-{{replyer}}</h3>
 						<div class="timeline-body"><span class='modalText'>{{replytext}}</span></div>
+						
+						{{#if replyer}}
 						<div class="timeline-footer">
 							<a class="btn btn-primary btn-xs" data-toggle="modal" data-target="#myModal">Modify</a>
 						</div>
+						{{/if}}
 					</div>
 				</li>
 			{{/each}}
 		</script>
 		<script>
+			Handlebars.registerHelper("if",function(replyer, options){
+				if(replyer == "${login.userid}"){
+					return options.fn(this);
+				}else{
+					return "";
+				}
+			});
+		
 			Handlebars.registerHelper("prettifyDate",function(value){
 				var dateObj= new Date(value);
 				var year=dateObj.getFullYear();
@@ -187,7 +200,7 @@
 				});
 				
 				$(document).on("click","#pagination li a", function(){
-					e.pre
+					//e.pre
 					alert($(this).text());
 					
 				});
