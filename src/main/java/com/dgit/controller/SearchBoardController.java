@@ -165,5 +165,4 @@ public class SearchBoardController {
 		return entity;
 	}
 	
-	
 }
