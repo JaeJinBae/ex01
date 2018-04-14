@@ -81,7 +81,6 @@ public class SearchBoardController {
 			board.setFiles(files);
 		}
 		
-		
 		service.regist(board);
 		rttr.addFlashAttribute("msg","success");
 		return "redirect:/sboard/listPage";
