@@ -202,7 +202,7 @@
 				$(document).on("click","#pagination li a", function(){
 					//e.pre
 					alert($(this).text());
-					
+					getPage($(this).text());
 				});
 				
 				
