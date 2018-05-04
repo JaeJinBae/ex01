@@ -27,7 +27,7 @@ public class BoardController {
 
 	@RequestMapping("/listAll")
 	public void listAll(Model model) throws Exception {
-		logger.info("listAll");
+		logger.info("listAll"); 
 		service.listAll();
 
 		List<BoardVO> list = service.listAll();
